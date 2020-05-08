@@ -1,0 +1,42 @@
+### VSCode Extention: Rest Client
+### Ctrl + Alt + E to change the environment
+
+### Registration
+POST {{host}}/register
+content-type: application/json
+
+{
+    "device_id": "test-ttdata-07"
+}
+
+### Upload data
+POST {{host}}/uploaddata
+content-type: application/json
+
+{
+    "data_type": 2, 
+    "device_id": "test-ttdata-07", 
+    "key": "date|province_state|county|country_region",
+    "device_data": 
+    [{
+        "date": "2020-05-02",
+        "country_region": "US",
+        "province_state": "New York",
+        "city": "Albany2",
+        "last_update": "2020-03-12T10:43:02",
+        "confirmed":222,
+        "deaths": 2,
+        "recovered": 0,
+        "latitude":42.60060307,
+        "longitude": -73.97723916
+    }
+    ]
+}
+
+### Querydata
+GET {{host}}/querydata?data_type=2&device_id=test-ttdata-07
+
+
+### Get Shared Data
+GET {{host}}/getshareddata?
+&data_type=2&device_id=test-ttdata-07

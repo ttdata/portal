@@ -1,0 +1,22 @@
+{"rest-client.environmentVariables": 
+  {
+  "$shared": {
+      "version": "v1"
+  },
+  "Prod": {
+      "version": "v1",
+      "host": "http://ttdata.life:7061"     
+  },
+  "Dev": {
+      "version": "v1",
+      "host": "http://ixinbuy.com:7061"      
+  },
+  "ZN": {
+    "version": "v2",
+    "host": "http://112.17.170.154:7061"    
+ },
+ "RS-local": {
+   "host": "http://192.168.1.196:7061"    
+}
+}
+}
