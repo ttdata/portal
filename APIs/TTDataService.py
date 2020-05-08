@@ -2,9 +2,7 @@
 ## Author : Simon Li
 ## Date   : May 5, 2020
 ##
-## RS     - 108.48.52.183:7061
-## ZN     - 112.17.170.154:7061
-## ttdata - ixinbuy.com:7061
+## hostname refer settings.json in .vscode folder
 ##
 ## Usage:  
 ## import TTDataService
@@ -12,13 +10,15 @@
     
 import requests
 import json
+from termcolor import colored
 
 class TTDataService:
-    def __init__(self, host = "ixinby.com", port = 7061):
+    def __init__(self):
         '''
-            TTDataService: host(str), port(int)
+            TTDataService: ()
         '''
-        self.__url = "http://%s:%d" % (host, port)
+        # self.__url = url
+        # "http://%s:%d" % (host, port)
         
     @staticmethod
     def getUrl(base, route):
@@ -95,21 +95,30 @@ class TTDataService:
                 response = requests.post(url, data = payload)    
 
         return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
+def check_status(stage,response):    
+    if (response[0] == 200):
+        print(stage, ": pass")
+    else: 
+        print(stage, ": failed")
 
 if __name__ == '__main__':
-    ttdata = TTDataService("108.48.52.183")
+    host_url = 'http://192.168.1.196:7061'
+    print(host_url)
+    ttdata = TTDataService()
+    ttdata.url = host_url
     # Register
     print("== /register ==")
-    payload = '{"device_id": "ttdata-1"}'
+    payload = '{"device_id": "test-ttdata-101"}'
     response = ttdata.post("/register", payload)
     print(response)
-
+    check_status("register", response)
     # Upload data
     print("\n== /uploaddata ==")
     payload = {
                 "data_type": 2, 
-                "device_id": "ttdata-1", 
-                "device_data": {
+                "device_id": "test-ttdata-1", 
+                "key": "date|province|county|city",
+                "device_data": [{
                                     "date": "2020-05-06", 
                                     "province": "ON",
                                     "country": "Canada", 
@@ -121,13 +130,14 @@ if __name__ == '__main__':
                                     "latitude":43.6532,
                                     "longitude": 79.3832,
                                     "key": "date|province|city|country"	
-                }   
+                }]   
     }
     response = ttdata.post("/uploaddata", payload)
     #print(json.dumps(payload))
     print(response)
-
+    check_status("register", response)
     # Get shared data
     print("\n== /getshareddata ==")
-    response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, "ttdata-1"))
+    response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, "test-ttdata-1"))
     print(response)
+    check_status("register", response)
