@@ -19,7 +19,19 @@ content-type: application/json
     "key": "date|province_state|county|country_region",
     "device_data": 
     [{
-        "date": "2020-05-02",
+        "date": "2001-05-02",
+        "country_region": "US",
+        "province_state": "New York",
+        "city": "Albany2",
+        "last_update": "2020-03-12T10:43:02",
+        "confirmed":222,
+        "deaths": 2,
+        "recovered": 0,
+        "latitude":42.60060307,
+        "longitude": -73.97723916
+    },
+    {
+        "date": "2002-05-02",
         "country_region": "US",
         "province_state": "New York",
         "city": "Albany2",

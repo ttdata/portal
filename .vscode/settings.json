@@ -1,7 +1,7 @@
 {"rest-client.environmentVariables": 
   {
     "$shared": {
-        "version": "v1",
+        "version": "v1.0.0",
         "port": "7061"
     },
     "Prod": {

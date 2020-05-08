@@ -100,6 +100,7 @@ def check_status(stage,response):
         print(stage, ": pass")
     else: 
         print(stage, ": failed")
+        #TODO send sms to the system admin
 
 if __name__ == '__main__':
     host_url = 'http://192.168.1.196:7061'
