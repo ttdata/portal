@@ -2,7 +2,7 @@
 ### Ctrl + Alt + E to change the environment
 
 ### Registration
-POST {{host}}/register
+POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
@@ -10,7 +10,7 @@ content-type: application/json
 }
 
 ### Upload data
-POST {{host}}/uploaddata
+POST {{host}}:{{port}}/uploaddata
 content-type: application/json
 
 {
@@ -34,9 +34,9 @@ content-type: application/json
 }
 
 ### Querydata
-GET {{host}}/querydata?data_type=2&device_id=test-ttdata-07
+GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-ttdata-07
 
 
 ### Get Shared Data
-GET {{host}}/getshareddata?
+GET {{host}}:{{port}}/getshareddata?
 &data_type=2&device_id=test-ttdata-07
