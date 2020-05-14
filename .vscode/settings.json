@@ -22,5 +22,6 @@
   "Vicky-Ubuntu": {
     "host": "http://52.170.154.169"    
     } 
-  }
+  },
+  "python.pythonPath": "C:\\Users\\RenShan\\Anaconda3\\python.exe"
 }
