@@ -1,5 +1,6 @@
 {"rest-client.environmentVariables": 
   {
+<<<<<<< HEAD
   "$shared": {
       "version": "v1"
   },
@@ -20,4 +21,29 @@
 }
 },
 "python.pythonPath": "C:\\Users\\RenShan\\Anaconda3\\python.exe"
+=======
+    "$shared": {
+        "version": "v1.0.0",
+        "port": "7061"
+    },
+    "Prod": {
+        "version": "v1",
+        "host": "http://ttdata.life"     
+    },
+    "Dev": {
+        "version": "v1",
+        "host": "http://ixinbuy.com"      
+    },
+    "ZN": {
+      "version": "v2",
+      "host": "http://112.17.170.154"    
+    },
+  "RS-local": {
+    "host": "http://192.168.1.196"    
+    },
+  "Vicky-Ubuntu": {
+    "host": "http://52.170.154.169"    
+    } 
+  }
+>>>>>>> 853134817dc1be57adf16837b0b5b456e7586447
 }
