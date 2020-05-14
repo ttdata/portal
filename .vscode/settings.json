@@ -18,5 +18,6 @@
  "RS-local": {
    "host": "http://192.168.1.196:7061"    
 }
-}
+},
+"python.pythonPath": "C:\\Users\\RenShan\\Anaconda3\\python.exe"
 }
