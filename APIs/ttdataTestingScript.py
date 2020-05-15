@@ -190,7 +190,7 @@ if __name__ == '__main__':
     response = ttdata.post("/register", payload)
     print(response)
     check_status("register", response)
-    # Upload data
+    # Upload data   
     print("\n== /uploaddata ==")
     payload = {
                 "data_type": 2, 
