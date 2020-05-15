@@ -126,15 +126,19 @@ def transform_names(df):
   
     return (df, keycolumn)
 
-def covid19data_to_ttdata(did, source_file, URL, data_date, blocksize, waitsec):
+def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waitsec):
     print("processing: ", source_file)
     df = pd.read_csv(source_file, dtype = {'FIPS': str, 'ZIP': str, "ZIP_CODE": str})
     df, key = transform_names(df)
-    #errorCount = 0
-    
+    #errorCount = 0    
+
     totalsize = df.shape[0]
     batches =[list(range(i, min(i+blocksize, totalsize))) for i in range(0,totalsize,blocksize) ]
+
+    for i in range(int(totalsize / blocksize)):
+        register(device_id + "-" + str(i))
     
+    reg_num = 0
     for aBatch in batches:
         json_data_list = []
         for i in aBatch:
@@ -147,7 +151,7 @@ def covid19data_to_ttdata(did, source_file, URL, data_date, blocksize, waitsec):
         print("\nFor batch from: ", aBatch[0], ", to:", aBatch[-1])
         payload = {
              "data_type": 2, 
-             "device_id": did,
+             "device_id": pre_did + "-" + str(reg_num % blocksize),
              "key" : key,
              "device_data": json_data_list                
               }
@@ -156,8 +160,11 @@ def covid19data_to_ttdata(did, source_file, URL, data_date, blocksize, waitsec):
         print(response.elapsed.total_seconds())
         print(response.status_code)
         print(response.text)
+        reg_num += 1
         time.sleep(waitsec)
-
+    
+    return int(totalsize / blocksize)
+        
 def check_status(stage,response):    
     if (response[0] == 200):
         print(stage, ": pass")
@@ -165,36 +172,42 @@ def check_status(stage,response):
         print(stage, ": failed")
         #TODO send sms to the system admin
 
-def check_covid19(host, did):
+def check_covid19_upload(host, did):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
-
+    blocksizeNum = 50
+    waitsecNum = 5
     file = github_root + "/05-09-2020" + ".csv"
     ts = time.time()
-    covid19data_to_ttdata(did, source_file= file, 
+    
+    didNum = covid19data_to_ttdata(did, source_file= file, 
                             URL = host + "/uploaddata", 
-                            data_date = "2020-03-25", 
-                            blocksize = 500,
-                            waitsec = 1)
+                            data_date = "2020-05-09", 
+                            blocksize = blocksizeNum,
+                            waitsec = waitsecNum)
     te = time.time()
+    
     print('%s  %2.2f sec' % ("uploaddata", (te - ts) ))
+    
 
-if __name__ == '__main__':
-    host_url = 'http://ixinbuy.com:7061'
-    #host_url = 'http://192.168.1.196:7061'
-    print(host_url)
-    ttdata = TTDataService()
-    ttdata.url = host_url
-    # Register
+"""     print("\n== /getshareddata ==")
+    for i in range(didNum):
+        response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, did + "-" + str(i)))
+        print(i, response) """
+
+def register(did):
+    payload = '{"device_id": "' + did +'"}'
+    return ttdata.post("/register", payload)
+
+def check_reg_upload_getdata(did):
     print("== /register ==")
-    payload = '{"device_id": "test-ttdata-1"}'
-    response = ttdata.post("/register", payload)
+    response = register(did)
     print(response)
     check_status("register", response)
     # Upload data
     print("\n== /uploaddata ==")
     payload = {
                 "data_type": 2, 
-                "device_id": "test-ttdata-1", 
+                "device_id": did, 
                 "key": "date|province_state|county|country_region",
                 "device_data": [{
                                     "date": "2020-05-06", 
@@ -206,8 +219,7 @@ if __name__ == '__main__':
                                     "deaths": 84,
                                     "recovered": 14,
                                     "latitude":43.6532,
-                                    "longitude": 79.3832,
-                                    "key": "date|province|city|country"	
+                                    "longitude": 79.3832	
                 }]   
     }
     response = ttdata.post("/uploaddata", payload)
@@ -216,12 +228,24 @@ if __name__ == '__main__':
     check_status("uploaddata", response)
     # Get shared data
     print("\n== /getshareddata ==")
-    response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, "test-ttdata-1"))
+    response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, did))
     print(response)
     check_status("getshareddata", response)
+
+if __name__ == '__main__':
+    #host_url = 'http://ixinbuy.com:7061'
+    host_url = 'http://192.168.1.196:7061'
+    print(host_url)
+    ttdata = TTDataService()
+    ttdata.url = host_url    
+    device_id = "test-ttdata-202011"
+    check_reg_upload_getdata(device_id)
+
+    # Register
+    print("\n== /covid19 with 32 ids==")
+    #check_covid19_upload(host_url, device_id)
+
     
-    print("\n== /covid19 ==")
-    #check_covid19(host_url, "test-ttdata-1")
     
 
     
