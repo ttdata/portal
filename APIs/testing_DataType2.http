@@ -6,7 +6,7 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-status_checking-01"
+    "device_id": "test-51501"
 }
 
 ### Upload data
@@ -15,21 +15,21 @@ content-type: application/json
 
 {
     "data_type": 2, 
-    "device_id": "test-status_checking-01", 
+    "device_id": "test-51501", 
     "key": "date",
     "device_data": 
     [{
-        "date": "2001-05-02",
-        "last_checked": "2020-03-12T10:43:02",
-        "status": "pass"
+        "date": "2001-05-15",
+        "last_checked": "2020-05-12T10:43:02",
+        "status": "failed"
     }
     ]
 }
 
 ### Querydata
-GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-ttdata-07
+GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-51501
 
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=2&device_id=test-status_checking-01
+&data_type=2&device_id=test-51501

@@ -8,7 +8,7 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-med-07"
+    "device_id": "test-med-51501"
 }
 
 ### Upload data
@@ -17,14 +17,14 @@ content-type: application/json
 
 {
     "data_type": 1, 
-    "device_id": "test-med-07", 
+    "device_id": "test-med-51501", 
     "key": "",
-	"required_field": "",
+	"required_field": "issur|owner",
 	"device_data": [
 		{
 			"datetime": "2020-03-23T01:01:01",
-			"issuer": "i1",
-			"owner": "o2",
+			"issuer": "renshan01",
+			"owner": "owner01",
 			"med_data": {
 				"temperature": 36.5,
 				"heart_rate": 76,
@@ -58,16 +58,16 @@ content-type: application/json
 
 {
 	"data_type": 1,
-	"device_id":"test-med-07",
+	"device_id":"test-med-51501",
 	"owner":"o2",
-	"viewer": "viewer5",
+	"viewer": "viewer02",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
 
 ### Querydata
-GET {{host}}:{{port}}/querydata?data_type=1&device_id=test-med-07
+GET {{host}}:{{port}}/querydata?data_type=1&device_id=test-med-51501
 
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=1&device_id=test-med-07&viewer=viewer5
+&data_type=1&device_id=test-med-51501&viewer=viewer02

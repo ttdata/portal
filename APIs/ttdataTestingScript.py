@@ -233,8 +233,8 @@ def check_reg_upload_getdata(did):
     check_status("getshareddata", response)
 
 if __name__ == '__main__':
-    #host_url = 'http://ixinbuy.com:7061'
-    host_url = 'http://192.168.1.196:7061'
+    host_url = 'http://ixinbuy.com:7061'
+    #host_url = 'http://192.168.1.196:7061'
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
