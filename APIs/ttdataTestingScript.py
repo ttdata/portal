@@ -135,7 +135,7 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
     totalsize = df.shape[0]
     batches =[list(range(i, min(i+blocksize, totalsize))) for i in range(0,totalsize,blocksize) ]
 
-    total_did = totalsize / blocksize
+    total_did = totalsize / blocksize + 1
     for i in range(int(total_did)):
         register(device_id + "-" + str(i))
     
@@ -175,7 +175,7 @@ def check_status(stage,response):
 
 def check_covid19_upload(host, did):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
-    blocksizeNum = 350
+    blocksizeNum = 200
     waitsecNum = 0
     file = github_root + "/05-09-2020" + ".csv"
     ts = time.time()
