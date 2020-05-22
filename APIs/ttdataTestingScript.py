@@ -204,7 +204,7 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     check_status("getshareddata", response)
     te = time.time()
     logging.info('%s  %2.2f sec' % ("getshareddata", (te - ts) ))
-    
+
 def register(did):
     payload = '{"device_id": "' + did +'"}'
     return ttdata.post("/register", payload)
@@ -264,7 +264,12 @@ if __name__ == '__main__':
     # Register
     logging.info("== /covid19 with 32 ids==")
     print("\n== /covid19 with 32 ids==")
-    check_covid19_upload(host_url, device_id, 200, 2)
+
+    #using the 3rd para to define blocksize
+    #using the 4th para to define how many blocks you want to upload, 
+    #   0 means for none
+    #   any number larger than totalsize of the data / blocksize means for all
+    check_covid19_upload(host_url, device_id, 200, 9999)
 
     
     

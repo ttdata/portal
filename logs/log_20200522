@@ -29,3 +29,87 @@
 05/22/2020 11:18:00 AM == /getshareddata ==
 05/22/2020 11:18:16 AM getshareddata gets number of items: 3242 
 05/22/2020 11:18:16 AM getshareddata  15.91 sec
+05/22/2020 11:24:56 AM starting ttdataTestingScript.py ...
+05/22/2020 11:24:56 AM using http://192.168.1.196:7061
+05/22/2020 11:24:56 AM == /covid19 with 32 ids==
+05/22/2020 11:24:56 AM processing: https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-10-2020.csv
+05/22/2020 11:24:56 AM uploaddata  0.37 sec
+05/22/2020 11:24:56 AM == /getshareddata ==
+05/22/2020 11:25:01 AM getshareddata gets number of items: 3242 
+05/22/2020 11:25:01 AM getshareddata  4.64 sec
+05/22/2020 11:26:43 AM starting ttdataTestingScript.py ...
+05/22/2020 11:26:43 AM using http://192.168.1.196:7061
+05/22/2020 11:26:43 AM == /covid19 with 32 ids==
+05/22/2020 11:26:43 AM processing: https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-10-2020.csv
+05/22/2020 11:26:43 AM For batch from: 0 to 199
+05/22/2020 11:26:43 AM 0.234649
+05/22/2020 11:26:43 AM 200
+05/22/2020 11:26:43 AM COVID19 data uploaded successfully
+05/22/2020 11:26:43 AM For batch from: 200 to 399
+05/22/2020 11:26:55 AM 12.062268
+05/22/2020 11:26:55 AM 200
+05/22/2020 11:26:55 AM COVID19 data uploaded successfully
+05/22/2020 11:26:55 AM For batch from: 400 to 599
+05/22/2020 11:27:07 AM 12.022068
+05/22/2020 11:27:07 AM 200
+05/22/2020 11:27:07 AM COVID19 data uploaded successfully
+05/22/2020 11:27:07 AM For batch from: 600 to 799
+05/22/2020 11:27:19 AM 11.87675
+05/22/2020 11:27:19 AM 200
+05/22/2020 11:27:19 AM COVID19 data uploaded successfully
+05/22/2020 11:27:19 AM For batch from: 800 to 999
+05/22/2020 11:27:31 AM 11.764388
+05/22/2020 11:27:31 AM 200
+05/22/2020 11:27:31 AM COVID19 data uploaded successfully
+05/22/2020 11:27:31 AM For batch from: 1000 to 1199
+05/22/2020 11:27:44 AM 12.323249
+05/22/2020 11:27:44 AM 200
+05/22/2020 11:27:44 AM COVID19 data uploaded successfully
+05/22/2020 11:27:44 AM For batch from: 1200 to 1399
+05/22/2020 11:27:56 AM 11.925715
+05/22/2020 11:27:56 AM 200
+05/22/2020 11:27:56 AM COVID19 data uploaded successfully
+05/22/2020 11:27:56 AM For batch from: 1400 to 1599
+05/22/2020 11:28:08 AM 12.107712
+05/22/2020 11:28:08 AM 200
+05/22/2020 11:28:08 AM COVID19 data uploaded successfully
+05/22/2020 11:28:08 AM For batch from: 1600 to 1799
+05/22/2020 11:28:20 AM 11.899521
+05/22/2020 11:28:20 AM 200
+05/22/2020 11:28:20 AM COVID19 data uploaded successfully
+05/22/2020 11:28:20 AM For batch from: 1800 to 1999
+05/22/2020 11:28:32 AM 11.789512
+05/22/2020 11:28:32 AM 200
+05/22/2020 11:28:32 AM COVID19 data uploaded successfully
+05/22/2020 11:28:32 AM For batch from: 2000 to 2199
+05/22/2020 11:28:44 AM 12.283845
+05/22/2020 11:28:44 AM 200
+05/22/2020 11:28:44 AM COVID19 data uploaded successfully
+05/22/2020 11:28:44 AM For batch from: 2200 to 2399
+05/22/2020 11:28:56 AM 12.072201
+05/22/2020 11:28:56 AM 200
+05/22/2020 11:28:56 AM COVID19 data uploaded successfully
+05/22/2020 11:28:56 AM For batch from: 2400 to 2599
+05/22/2020 11:29:08 AM 12.250182
+05/22/2020 11:29:08 AM 200
+05/22/2020 11:29:08 AM COVID19 data uploaded successfully
+05/22/2020 11:29:08 AM For batch from: 2600 to 2799
+05/22/2020 11:29:20 AM 11.846138
+05/22/2020 11:29:20 AM 200
+05/22/2020 11:29:20 AM COVID19 data uploaded successfully
+05/22/2020 11:29:20 AM For batch from: 2800 to 2999
+05/22/2020 11:29:32 AM 11.748077
+05/22/2020 11:29:32 AM 200
+05/22/2020 11:29:32 AM COVID19 data uploaded successfully
+05/22/2020 11:29:32 AM For batch from: 3000 to 3199
+05/22/2020 11:29:44 AM 11.89106
+05/22/2020 11:29:44 AM 200
+05/22/2020 11:29:44 AM COVID19 data uploaded successfully
+05/22/2020 11:29:44 AM For batch from: 3200 to 3233
+05/22/2020 11:29:56 AM 12.148312
+05/22/2020 11:29:56 AM 200
+05/22/2020 11:29:56 AM COVID19 data uploaded successfully
+05/22/2020 11:29:56 AM uploaddata  193.76 sec
+05/22/2020 11:29:56 AM == /getshareddata ==
+05/22/2020 11:30:03 AM getshareddata gets number of items: 3248 
+05/22/2020 11:30:03 AM getshareddata  6.71 sec
