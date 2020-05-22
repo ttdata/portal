@@ -198,10 +198,13 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     print("\n== /getshareddata ==")
 
     #for i in range(didNum):
+    ts = time.time()   
     response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, did))
     
     check_status("getshareddata", response)
-
+    te = time.time()
+    logging.info('%s  %2.2f sec' % ("getshareddata", (te - ts) ))
+    
 def register(did):
     payload = '{"device_id": "' + did +'"}'
     return ttdata.post("/register", payload)
