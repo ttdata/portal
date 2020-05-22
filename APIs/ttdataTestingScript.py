@@ -14,8 +14,9 @@ import numpy as np
 import os
 import requests
 import json
-import time    
-from termcolor import colored
+import time 
+from datetime import datetime
+import logging
 
 class TTDataService:
     def __init__(self):
@@ -126,8 +127,9 @@ def transform_names(df):
   
     return (df, keycolumn)
 
-def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waitsec):
+def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, num_batches):
     print("processing: ", source_file)
+    logging.info("processing: " + source_file)
     df = pd.read_csv(source_file, dtype = {'FIPS': str, 'ZIP': str, "ZIP_CODE": str})
     df, key = transform_names(df)
     #errorCount = 0    
@@ -135,12 +137,12 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
     totalsize = df.shape[0]
     batches =[list(range(i, min(i+blocksize, totalsize))) for i in range(0,totalsize,blocksize) ]
 
-    # total_did = totalsize / blocksize + 1
-    # for i in range(int(total_did)):
-    #     register(device_id + "-" + str(i))
-    
+    run_num_batches = 0
     reg_num = 0
     for aBatch in batches:
+        run_num_batches += 1
+        if (run_num_batches > num_batches) :
+            break
         json_data_list = []
         for i in aBatch:
             row = df.iloc[i]
@@ -148,7 +150,8 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
             device_data = {"date":data_date }
             device_data.update(json.loads(row.to_json()))
             json_data_list.append(device_data)
-        
+
+        logging.info("For batch from: %d to %d" % (aBatch[0], aBatch[-1]))        
         print("\nFor batch from: ", aBatch[0], ", to:", aBatch[-1])
         payload = {
              "data_type": 2, 
@@ -158,42 +161,46 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
               }
         #print(payload)
         response = requests.post(URL, json = payload)
+        logging.info(response.elapsed.total_seconds())
+        logging.info(response.status_code)
+        logging.info(response.text)
         print(response.elapsed.total_seconds())
         print(response.status_code)
         print(response.text)
         reg_num += 1
-        time.sleep(waitsec)
+        #time.sleep(waitsec)
     
     return int(totalsize / blocksize)
         
 def check_status(stage,response):    
     if (response[0] == 200):
-        print(stage, ": pass")
+        logging.info(stage + " gets number of items: %d " % len(response[1]))
+        print(stage + ": pass")
     else: 
+        logging.info(stage + ": failed")
         print(stage, ": failed")
         #TODO send sms to the system admin
 
-def check_covid19_upload(host, did):
+def check_covid19_upload(host, did, blocksize, num_batches):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
-    blocksizeNum = 200
-    waitsecNum = 0
     file = github_root + "/05-10-2020" + ".csv"
-    ts = time.time()
-    
-    didNum = covid19data_to_ttdata(did, source_file= file, 
+    ts = time.time()    
+    covid19data_to_ttdata(did, source_file= file, 
                             URL = host + "/uploaddata", 
                             data_date = "2020-05-09", 
-                            blocksize = blocksizeNum,
-                            waitsec = waitsecNum)
+                            blocksize = blocksize,
+                            num_batches = num_batches)
     te = time.time()
-    
-    print('%s  %2.2f sec' % ("uploaddata", (te - ts) ))
-    
 
-"""     print("\n== /getshareddata ==")
-    for i in range(didNum):
-        response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, did + "-" + str(i)))
-        print(i, response) """
+    logging.info('%s  %2.2f sec' % ("uploaddata", (te - ts) ))
+    print('%s  %2.2f sec' % ("uploaddata", (te - ts)))
+    logging.info("== /getshareddata ==")
+    print("\n== /getshareddata ==")
+
+    #for i in range(didNum):
+    response = ttdata.get("/getshareddata?data_type={0}&device_id={1}".format(2, did))
+    
+    check_status("getshareddata", response)
 
 def register(did):
     payload = '{"device_id": "' + did +'"}'
@@ -236,15 +243,25 @@ def check_reg_upload_getdata(did):
 if __name__ == '__main__':
     #host_url = 'http://ixinbuy.com:7061'
     host_url = 'http://192.168.1.196:7061'
+
+    #create a log file
+    timestr = datetime.now().strftime("%Y%m%d")    
+    log_fname = 'log_' + timestr
+    log_filename = 'logs/'+log_fname
+    logging.basicConfig(filename=log_filename, level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    
+    logging.info('starting ttdataTestingScript.py ...')
+    logging.info('using ' + host_url)
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
     device_id = "test-ttdata-20200521"
-    check_reg_upload_getdata(device_id)
+    #check_reg_upload_getdata(device_id)
 
     # Register
+    logging.info("== /covid19 with 32 ids==")
     print("\n== /covid19 with 32 ids==")
-    check_covid19_upload(host_url, device_id)
+    check_covid19_upload(host_url, device_id, 200, 2)
 
     
     
