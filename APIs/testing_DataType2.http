@@ -16,12 +16,33 @@ content-type: application/json
 {
     "data_type": 2, 
     "device_id": "test-51501", 
-    "key": "date",
+    "key": "last_update",
     "device_data": 
-    [{
-        "date": "2001-05-15",
-        "last_checked": "2020-05-12T10:43:02",
-        "status": "failed"
+    [ {
+        "date": "2020-03-30",
+        "country_region": "US",
+        "province_state": "New York",
+        "county": "Allegany",
+        "last_update": "2020-03-10T10:43:02",
+        "confirmed": 7,
+        "deaths": 1,
+        "recovered": 0,
+        "latitude": 42.60060306,
+        "longitude": -73.97723916,
+        "key": "date|province_state|county|country_region"
+    },
+    {
+        "date": "2020-04-01",
+        "country_region": "US",
+        "province_state": "New York",
+        "county": "Allegany",
+        "last_update": "2020-04-12T10:43:02",
+        "confirmed": 10,
+        "deaths": 1,
+        "recovered": 0,
+        "latitude": 42.60060306,
+        "longitude": -73.97723916,
+        "key": "date|province_state|county|country_region"
     }
     ]
 }
@@ -32,4 +53,4 @@ GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-51501
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=2&device_id=test-51501
+&data_type=2&device_id=test-51501&country_region=us&from_date=2020-03-02&to_date=2020-03-31&county=Allegany
