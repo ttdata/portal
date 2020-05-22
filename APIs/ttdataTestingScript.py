@@ -177,7 +177,7 @@ def check_covid19_upload(host, did):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
     blocksizeNum = 200
     waitsecNum = 0
-    file = github_root + "/05-09-2020" + ".csv"
+    file = github_root + "/05-10-2020" + ".csv"
     ts = time.time()
     
     didNum = covid19data_to_ttdata(did, source_file= file, 
