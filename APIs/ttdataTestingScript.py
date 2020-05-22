@@ -135,8 +135,8 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
     totalsize = df.shape[0]
     batches =[list(range(i, min(i+blocksize, totalsize))) for i in range(0,totalsize,blocksize) ]
 
-    for i in range(int(totalsize / blocksize)):
-        register(device_id + "-" + str(i))
+    # for i in range(int(totalsize / blocksize)):
+    #     register(device_id + "-" + str(i))
     
     reg_num = 0
     for aBatch in batches:
@@ -151,7 +151,7 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
         print("\nFor batch from: ", aBatch[0], ", to:", aBatch[-1])
         payload = {
              "data_type": 2, 
-             "device_id": pre_did + "-" + str(reg_num % blocksize),
+             "device_id": pre_did, #+ "-" + str(reg_num % blocksize),
              "key" : key,
              "device_data": json_data_list                
               }
@@ -174,8 +174,8 @@ def check_status(stage,response):
 
 def check_covid19_upload(host, did):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
-    blocksizeNum = 50
-    waitsecNum = 5
+    blocksizeNum = 350
+    waitsecNum = 0
     file = github_root + "/05-09-2020" + ".csv"
     ts = time.time()
     
@@ -233,17 +233,17 @@ def check_reg_upload_getdata(did):
     check_status("getshareddata", response)
 
 if __name__ == '__main__':
-    host_url = 'http://ixinbuy.com:7061'
-    #host_url = 'http://192.168.1.196:7061'
+    #host_url = 'http://ixinbuy.com:7061'
+    host_url = 'http://192.168.1.196:7061'
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-202011"
+    device_id = "test-ttdata-20200521"
     check_reg_upload_getdata(device_id)
 
     # Register
     print("\n== /covid19 with 32 ids==")
-    #check_covid19_upload(host_url, device_id)
+    check_covid19_upload(host_url, device_id)
 
     
     
