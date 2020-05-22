@@ -135,9 +135,9 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
     totalsize = df.shape[0]
     batches =[list(range(i, min(i+blocksize, totalsize))) for i in range(0,totalsize,blocksize) ]
 
-    total_did = totalsize / blocksize + 1
-    for i in range(int(total_did)):
-        register(device_id + "-" + str(i))
+    # total_did = totalsize / blocksize + 1
+    # for i in range(int(total_did)):
+    #     register(device_id + "-" + str(i))
     
     reg_num = 0
     for aBatch in batches:
@@ -152,7 +152,7 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, waits
         print("\nFor batch from: ", aBatch[0], ", to:", aBatch[-1])
         payload = {
              "data_type": 2, 
-             "device_id": pre_did + "-" + str(reg_num),
+             "device_id": pre_did, #+ "-" + str(reg_num),
              "key" : key,
              "device_data": json_data_list                
               }
