@@ -206,8 +206,13 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     logging.info('%s  %2.2f sec' % ("getshareddata", (te - ts) ))
 
 def register(did):
-    payload = '{"device_id": "' + did +'"}'
-    return ttdata.post("/register", payload)
+    payload = {
+                "device_id": did,
+                "category": "Medical"
+            }
+    response = ttdata.post("/register", payload)
+    return(response)
+
 
 def check_reg_upload_getdata(did):
     print("== /register ==")
@@ -259,7 +264,7 @@ if __name__ == '__main__':
     ttdata = TTDataService()
     ttdata.url = host_url    
     device_id = "test-ttdata-20200521"
-    #check_reg_upload_getdata(device_id)
+    check_reg_upload_getdata(device_id)
 
     # Register
     logging.info("== /covid19 with 32 ids==")
@@ -269,6 +274,7 @@ if __name__ == '__main__':
     #using the 4th para to define how many blocks you want to upload, 
     #   0 means for none
     #   any number larger than totalsize of the data / blocksize means for all
+    # 
     check_covid19_upload(host_url, device_id, 200, 9999)
 
     

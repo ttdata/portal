@@ -8,7 +8,8 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-med-51501"
+    "device_id": "renapp1",
+	"category": "industrial" 
 }
 
 ### Upload data
@@ -17,14 +18,14 @@ content-type: application/json
 
 {
     "data_type": 1, 
-    "device_id": "test-med-51501", 
+    "device_id": "renapp1", 
     "key": "",
 	"required_field": "issur|owner",
 	"device_data": [
 		{
 			"datetime": "2020-03-23T01:01:01",
-			"issuer": "renshan01",
-			"owner": "owner01",
+			"issuer": "lab1",
+			"owner": "renshan",
 			"med_data": {
 				"temperature": 36.5,
 				"heart_rate": 76,
@@ -59,7 +60,7 @@ content-type: application/json
 {
 	"data_type": 1,
 	"device_id":"test-med-51501",
-	"owner":"o2",
+	"owner":"renshan",
 	"viewer": "viewer02",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
