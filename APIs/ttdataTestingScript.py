@@ -181,18 +181,12 @@ def check_status(stage,response):
 
 def check_covid19_upload(host, did, blocksize, num_batches):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
-<<<<<<< HEAD
     blocksizeNum = 200
     waitsecNum = 0
     file = github_root + "/05-11-2020" + ".csv"
     ts = time.time()
     
     didNum = covid19data_to_ttdata(did, source_file= file, 
-=======
-    file = github_root + "/05-10-2020" + ".csv"
-    ts = time.time()    
-    covid19data_to_ttdata(did, source_file= file, 
->>>>>>> e51820952442aeb966f8d9c056fb8fa594f2ee19
                             URL = host + "/uploaddata", 
                             data_date = "2020-05-09", 
                             blocksize = blocksize,
@@ -257,9 +251,6 @@ def check_reg_upload_getdata(did):
 
 if __name__ == '__main__':
     #host_url = 'http://ixinbuy.com:7061'
-<<<<<<< HEAD
-    host_url = 'http://ttdata.life:7061'
-=======
     host_url = 'http://192.168.1.196:7061'
 
     #create a log file
@@ -270,7 +261,6 @@ if __name__ == '__main__':
     
     logging.info('starting ttdataTestingScript.py ...')
     logging.info('using ' + host_url)
->>>>>>> e51820952442aeb966f8d9c056fb8fa594f2ee19
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
