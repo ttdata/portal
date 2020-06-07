@@ -18,7 +18,7 @@ content-type: application/json
 
 {
     "data_type": 1, 
-    "device_id": "renapp1", 
+    "device_id": "test-med-51501", 
     "key": "",
 	"required_field": "issur|owner",
 	"device_data": [
