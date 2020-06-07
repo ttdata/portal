@@ -183,7 +183,7 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
     #blocksizeNum = 200
     #waitsecNum = 0
-    file = github_root + "/05-14-2020" + ".csv"
+    file = github_root + "/05-15-2020" + ".csv"
     ts = time.time()
     
     #didNum =

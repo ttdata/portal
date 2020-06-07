@@ -303,3 +303,10 @@
 06/07/2020 04:53:18 PM == /getshareddata ==
 06/07/2020 04:53:19 PM getshareddata gets number of items: 39 
 06/07/2020 04:53:19 PM getshareddata  0.96 sec
+06/07/2020 06:18:09 PM starting ttdataTestingScript.py ...
+06/07/2020 06:18:09 PM using http://192.168.1.196:7061
+06/07/2020 06:18:09 PM register gets number of items: 50 
+06/07/2020 06:18:09 PM uploaddata gets number of items: 34 
+06/07/2020 06:18:09 PM getshareddata gets number of items: 39 
+06/07/2020 06:18:09 PM == /covid19 with 32 ids==
+06/07/2020 06:18:09 PM processing: https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-15-2020.csv
