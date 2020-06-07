@@ -1,8 +1,6 @@
 ## Purpose: provide a generic service for testing API calls
 ## Author : Simon Li
 ## Date   : May 5, 2020
-## Modif  : Ren Shan
-## Last updated: 5/10/2020
 ## hostname refer settings.json in .vscode folder
 ##
 ## Usage:  
@@ -177,7 +175,7 @@ def check_covid19_upload(host, did):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
     blocksizeNum = 200
     waitsecNum = 0
-    file = github_root + "/05-10-2020" + ".csv"
+    file = github_root + "/05-11-2020" + ".csv"
     ts = time.time()
     
     didNum = covid19data_to_ttdata(did, source_file= file, 
@@ -235,11 +233,11 @@ def check_reg_upload_getdata(did):
 
 if __name__ == '__main__':
     #host_url = 'http://ixinbuy.com:7061'
-    host_url = 'http://192.168.1.196:7061'
+    host_url = 'http://ttdata.life:7061'
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-20200521"
+    device_id = "test-ttdata-20200522"
     check_reg_upload_getdata(device_id)
 
     # Register
