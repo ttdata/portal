@@ -7,7 +7,11 @@ content-type: application/json
 
 {
     "device_id": "test-51501",
+<<<<<<< HEAD
     "category": "testing"
+=======
+    "category": "medical"
+>>>>>>> e51820952442aeb966f8d9c056fb8fa594f2ee19
 }
 
 ### Upload data
@@ -17,7 +21,7 @@ content-type: application/json
 {
     "data_type": 2, 
     "device_id": "test-51501", 
-    "key": "last_update",
+    "key": "date|country_region|province_state|county|last_update|confirmed",
     "device_data": 
     [ {
         "date": "2020-03-30",
@@ -29,8 +33,7 @@ content-type: application/json
         "deaths": 1,
         "recovered": 0,
         "latitude": 42.60060306,
-        "longitude": -73.97723916,
-        "key": "date|province_state|county|country_region"
+        "longitude": -73.97723916
     },
     {
         "date": "2020-04-01",
@@ -54,4 +57,8 @@ GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-51501
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
+<<<<<<< HEAD
 &data_type=2&device_id=test-51501
+=======
+&data_type=2&device_id=test-ttdata-20200521&country_region=us&date=2020-03-02|2020-05-22&county=Allegany
+>>>>>>> e51820952442aeb966f8d9c056fb8fa594f2ee19
