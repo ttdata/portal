@@ -54,4 +54,4 @@ GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-51501
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=2&device_id=ttest-51501&country_region=us&from_date=2020-03-02&to_date=2020-05-22&county=Allegany
+&data_type=2&device_id=test-51501
