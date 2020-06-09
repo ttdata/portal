@@ -155,3 +155,81 @@
 06/09/2020 09:48:56 AM == /getshareddata ==
 06/09/2020 09:48:59 AM getshareddata gets number of items: 39 
 06/09/2020 09:48:59 AM getshareddata  3.27 sec
+06/09/2020 09:52:06 AM starting ttdataTestingScript.py ...
+06/09/2020 09:52:06 AM using http://192.168.1.196:7061
+06/09/2020 09:52:06 AM register gets number of items: 50 
+06/09/2020 09:52:08 AM uploaddata gets number of items: 34 
+06/09/2020 09:52:08 AM getshareddata gets number of items: 39 
+06/09/2020 09:52:08 AM == /covid19 with 32 ids==
+06/09/2020 09:52:08 AM processing: https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-15-2020.csv
+06/09/2020 09:52:10 AM For batch from: 0 to 499
+06/09/2020 09:52:10 AM 0.249236
+06/09/2020 09:52:10 AM 200
+06/09/2020 09:52:10 AM COVID19 data uploaded successfully
+06/09/2020 09:52:10 AM For batch from: 500 to 999
+06/09/2020 09:52:14 AM 4.380613
+06/09/2020 09:52:14 AM 200
+06/09/2020 09:52:14 AM COVID19 data uploaded successfully
+06/09/2020 09:52:14 AM For batch from: 1000 to 1499
+06/09/2020 09:52:19 AM 4.620081
+06/09/2020 09:52:19 AM 200
+06/09/2020 09:52:19 AM COVID19 data uploaded successfully
+06/09/2020 09:52:19 AM For batch from: 1500 to 1999
+06/09/2020 09:52:24 AM 4.665335
+06/09/2020 09:52:24 AM 200
+06/09/2020 09:52:24 AM COVID19 data uploaded successfully
+06/09/2020 09:52:24 AM For batch from: 2000 to 2499
+06/09/2020 09:52:29 AM 4.838423
+06/09/2020 09:52:29 AM 200
+06/09/2020 09:52:29 AM COVID19 data uploaded successfully
+06/09/2020 09:52:29 AM For batch from: 2500 to 2999
+06/09/2020 09:52:34 AM 4.867259
+06/09/2020 09:52:34 AM 200
+06/09/2020 09:52:34 AM COVID19 data uploaded successfully
+06/09/2020 09:52:34 AM For batch from: 3000 to 3299
+06/09/2020 09:52:40 AM 5.501061
+06/09/2020 09:52:40 AM 200
+06/09/2020 09:52:40 AM COVID19 data uploaded successfully
+06/09/2020 09:52:40 AM uploaddata  31.74 sec
+06/09/2020 09:52:40 AM == /getshareddata ==
+06/09/2020 09:52:43 AM getshareddata gets number of items: 39 
+06/09/2020 09:52:43 AM getshareddata  3.30 sec
+06/09/2020 09:57:24 AM starting ttdataTestingScript.py ...
+06/09/2020 09:57:24 AM using http://192.168.1.196:7061
+06/09/2020 09:57:24 AM register gets number of items: 50 
+06/09/2020 09:57:25 AM uploaddata gets number of items: 34 
+06/09/2020 09:57:26 AM getshareddata gets number of items: 3 
+06/09/2020 09:57:26 AM == /covid19 with 32 ids==
+06/09/2020 09:57:26 AM processing: https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-15-2020.csv
+06/09/2020 09:57:26 AM For batch from: 0 to 499
+06/09/2020 09:57:27 AM 1.122649
+06/09/2020 09:57:27 AM 200
+06/09/2020 09:57:27 AM COVID19 data uploaded successfully
+06/09/2020 09:57:27 AM For batch from: 500 to 999
+06/09/2020 09:57:39 AM 11.115657
+06/09/2020 09:57:39 AM 200
+06/09/2020 09:57:39 AM COVID19 data uploaded successfully
+06/09/2020 09:57:39 AM For batch from: 1000 to 1499
+06/09/2020 09:57:55 AM 16.138494
+06/09/2020 09:57:55 AM 200
+06/09/2020 09:57:55 AM COVID19 data uploaded successfully
+06/09/2020 09:57:55 AM For batch from: 1500 to 1999
+06/09/2020 09:58:12 AM 17.317997
+06/09/2020 09:58:12 AM 200
+06/09/2020 09:58:12 AM COVID19 data uploaded successfully
+06/09/2020 09:58:13 AM For batch from: 2000 to 2499
+06/09/2020 09:58:32 AM 19.287856
+06/09/2020 09:58:32 AM 200
+06/09/2020 09:58:32 AM COVID19 data uploaded successfully
+06/09/2020 09:58:32 AM For batch from: 2500 to 2999
+06/09/2020 09:58:58 AM 26.085948
+06/09/2020 09:58:58 AM 200
+06/09/2020 09:58:58 AM COVID19 data uploaded successfully
+06/09/2020 09:58:58 AM For batch from: 3000 to 3299
+06/09/2020 09:59:29 AM 30.499081
+06/09/2020 09:59:29 AM 200
+06/09/2020 09:59:29 AM COVID19 data uploaded successfully
+06/09/2020 09:59:29 AM uploaddata  123.15 sec
+06/09/2020 09:59:29 AM == /getshareddata ==
+06/09/2020 09:59:44 AM getshareddata: failed
+06/09/2020 09:59:44 AM getshareddata  15.03 sec

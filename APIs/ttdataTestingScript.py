@@ -228,7 +228,7 @@ def check_reg_upload_getdata(did):
                 "device_id": did, 
                 "key": "date|province_state|county|country_region",
                 "device_data": [{
-                                    "date": "2020-05-08", 
+                                    "date": "2020-05-09", 
                                     "province_state": "ON",
                                     "country_region": "Canada", 
                                     "county": "Toronto",
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-20200522"
+    device_id = "test-ttdata-20200523"
     check_reg_upload_getdata(device_id)
 
     # Register
@@ -277,7 +277,7 @@ if __name__ == '__main__':
     #   0 means for none
     #   any number larger than totalsize of the data / blocksize means for all
     # 
-    check_covid19_upload(host_url, device_id, 500, 9999)
+    check_covid19_upload(host_url, device_id, 50, 9999)
 
     
     
