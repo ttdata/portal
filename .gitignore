@@ -1,1 +1,3 @@
 .vscode/
+# ignore all logs
+log_*.*
