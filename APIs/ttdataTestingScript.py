@@ -228,7 +228,7 @@ def check_reg_upload_getdata(did):
                 "device_id": did, 
                 "key": "date|province_state|county|country_region",
                 "device_data": [{
-                                    "date": "2020-05-07", 
+                                    "date": "2020-05-08", 
                                     "province_state": "ON",
                                     "country_region": "Canada", 
                                     "county": "Toronto",

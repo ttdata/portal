@@ -1,3 +1,4 @@
 .vscode/settings.json
 # ignore all logs
+logs/log_*
 logs/log_*.*
