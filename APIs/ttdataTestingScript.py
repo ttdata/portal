@@ -183,7 +183,7 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
     #blocksizeNum = 200
     #waitsecNum = 0
-    file = github_root + "/05-15-2020" + ".csv"
+    file = github_root + "/05-16-2020" + ".csv"
     ts = time.time()
     
     #didNum =
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     print(host_url)
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-20200523"
+    device_id = "test-ttdata-20200524"
     check_reg_upload_getdata(device_id)
 
     # Register
