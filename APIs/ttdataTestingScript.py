@@ -15,6 +15,7 @@ import json
 import time 
 from datetime import datetime
 import logging
+from requests.auth import HTTPBasicAuth
 
 class TTDataService:
     def __init__(self):
@@ -56,6 +57,10 @@ class TTDataService:
         return self.__url
 
     @property
+    def appkey(self):
+        return appkey
+
+    @property
     def json(self):
         '''
            expose json 
@@ -91,13 +96,13 @@ class TTDataService:
         '''
         url = TTDataService.getUrl(self.__url, route)
         if isinstance(payload, dict):
-            response = requests.post(url, json = payload)
+            response = requests.post(url, json = payload)            
         else:
             try:
                 response = requests.post(url, json = json.loads(payload))
             except:
                 response = requests.post(url, data = payload)    
-
+        #appkey = TTDataService.JSONParseIfPossible(response.text)["data"]
         return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
 
 def transform_names(df):
@@ -210,19 +215,23 @@ def check_covid19_upload(host, did, blocksize, num_batches):
 def register(did):
     payload = {
                 "device_id": did,
-                "category": "Medical"
+                "category": "TEST"
             }
     response = ttdata.post("/register", payload)
-    return(response)
+    if response[1]["data"]:
+        appkey = response[1]["data"]
+    return(appkey)
 
 
 def check_reg_upload_getdata(did):
     print("== /register ==")
-    response = register(did)
-    print(response)
-    check_status("register", response)
+    appkey = register(did)
+    print(appkey)
+    check_status("register", appkey)
     # Upload data
     print("\n== /uploaddata ==")
+    headers = {"Accept": "application/json"}
+    auth = HTTPBasicAuth("appkey", appkey )
     payload = {
                 "data_type": 2, 
                 "device_id": did, 
@@ -251,8 +260,8 @@ def check_reg_upload_getdata(did):
     check_status("getshareddata", response)
 
 if __name__ == '__main__':
-    #host_url = 'http://ixinbuy.com:7061'
-    host_url = 'http://192.168.1.196:7061'
+    host_url = 'http://ixinbuy.com:7061'
+    #host_url = 'http://192.168.1.196:7061'
 
     #create a log file
     timestr = datetime.now().strftime("%Y%m%d")    
@@ -263,9 +272,10 @@ if __name__ == '__main__':
     logging.info('starting ttdataTestingScript.py ...')
     logging.info('using ' + host_url)
     print(host_url)
+    appkey = ""
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-20200524"
+    device_id = "test-ttdata-20200527"
     check_reg_upload_getdata(device_id)
 
     # Register
