@@ -24,7 +24,9 @@ class TTDataService:
         '''
         # self.__url = url
         # "http://%s:%d" % (host, port)
-        
+        self.__url = None
+        self.__appkey = None
+
     @staticmethod
     def getUrl(base, route):
         '''
@@ -58,7 +60,11 @@ class TTDataService:
 
     @property
     def appkey(self):
-        return appkey
+        return self.__appkey
+
+    @appkey.setter
+    def appkey(self, appkey):
+        self.__appkey = appkey
 
     @property
     def json(self):
@@ -85,7 +91,11 @@ class TTDataService:
            Out: tuple(int, dict/str)
         '''
         url = TTDataService.getUrl(self.__url, route)
-        response = requests.get(url)
+
+        if self.__appkey:  # Use the auth if we have one
+            response = requests.get(url, headers={'appkey': self.__appkey})
+        else:
+            response = requests.get(url)
         return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
 
     def post(self, route, payload):
@@ -96,12 +106,22 @@ class TTDataService:
         '''
         url = TTDataService.getUrl(self.__url, route)
         if isinstance(payload, dict):
-            response = requests.post(url, json = payload)            
+            if self.__appkey:
+                response = requests.post(url, json=payload, headers={'appkey': self.__appkey})
+            else:
+                response = requests.post(url, json=payload)
         else:
             try:
-                response = requests.post(url, json = json.loads(payload))
+                if self.__appkey:
+                	response = requests.post(url, json=payload, headers={'appkey': self.__appkey})
+                else:
+                    response = requests.post(url, json=json.loads(payload))
             except:
-                response = requests.post(url, data = payload)    
+                if self.__appkey:
+                	response = requests.post(url, data=payload, headers={'appkey': self.__appkey})
+                else:    
+                	response = requests.post(url, data=payload)  
+
         #appkey = TTDataService.JSONParseIfPossible(response.text)["data"]
         return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
 
