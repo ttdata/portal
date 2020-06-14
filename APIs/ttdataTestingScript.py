@@ -296,6 +296,8 @@ if __name__ == '__main__':
     appkey = ""
     ttdata = TTDataService()
     ttdata.url = host_url    
+
+    #create a new device_id before run
     device_id = "test-ttdata-20200610"
     check_reg_upload_getdata(device_id)
 
