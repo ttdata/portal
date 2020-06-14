@@ -19,7 +19,7 @@ appkey: d65bd107f40c3be1999d5a07ac883db6c6cfa053db953dec4c430662b2bb4492
     "data_type": 2, 
     "device_id": "test-ttdata-20200526", 
     "key": "date|country_region|province_state|county|last_update|confirmed",
-    "required":"",
+    "required_field":"",
     "device_data": 
     [ {
         "date": "2020-05-32",
