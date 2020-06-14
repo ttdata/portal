@@ -6,18 +6,20 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-ttdata-20200523",
+    "device_id": "test-ttdata-20200526",
     "category": "testing"
 }
 
 ### Upload data
 POST {{host}}:{{port}}/uploaddata
 content-type: application/json
+appkey: d65bd107f40c3be1999d5a07ac883db6c6cfa053db953dec4c430662b2bb4492
 
 {
     "data_type": 2, 
-    "device_id": "test-ttdata-20200523", 
+    "device_id": "test-ttdata-20200526", 
     "key": "date|country_region|province_state|county|last_update|confirmed",
+    "required":"",
     "device_data": 
     [ {
         "date": "2020-05-32",
@@ -48,10 +50,11 @@ content-type: application/json
 }
 
 ### Querydata
-GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-ttdata-20200523
-
+GET {{host}}:{{port}}/querydata?data_type=2&device_id=test-ttdata-20200526
+appkey: d65bd107f40c3be1999d5a07ac883db6c6cfa053db953dec4c430662b2bb4492
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=2&device_id=test-ttdata-20200523
+&data_type=2&device_id=test-ttdata-20200526
+appkey: d65bd107f40c3be1999d5a07ac883db6c6cfa053db953dec4c430662b2bb4492
 # &data_type=2&device_id=test-ttdata-20200521&country_region=us&date=2020-03-02|2020-05-22&county=Allegany
