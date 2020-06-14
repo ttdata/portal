@@ -15,6 +15,7 @@ content-type: application/json
 ### Upload data
 POST {{host}}:{{port}}/uploaddata
 content-type: application/json
+appkey: <appkey>
 
 {
     "data_type": 1, 
