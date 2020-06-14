@@ -96,7 +96,7 @@ class TTDataService:
             response = requests.get(url, headers={'appkey': self.__appkey})
         else:
             response = requests.get(url)
-        return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
+        return (response)
 
     def post(self, route, payload):
         '''
@@ -122,8 +122,8 @@ class TTDataService:
                 else:    
                 	response = requests.post(url, data=payload)  
 
-        #appkey = TTDataService.JSONParseIfPossible(response.text)["data"]
-        return (response.status_code, TTDataService.JSONParseIfPossible(response.text))
+        #response.status_code, TTDataService.JSONParseIfPossible(response.text)
+        return (response)
 
 def transform_names(df):
     '''
@@ -150,7 +150,7 @@ def transform_names(df):
   
     return (df, keycolumn)
 
-def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, num_batches):
+def covid19data_to_ttdata(pre_did, source_file, data_date, blocksize, num_batches):
     print("processing: ", source_file)
     logging.info("processing: " + source_file)
     df = pd.read_csv(source_file, dtype = {'FIPS': str, 'ZIP': str, "ZIP_CODE": str})
@@ -183,7 +183,8 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, num_b
              "device_data": json_data_list                
               }
         #print(payload)
-        response = requests.post(URL, json = payload)
+        #ttdata.appkey = appkey
+        response = ttdata.post("/uploaddata", payload)
         logging.info(response.elapsed.total_seconds())
         logging.info(response.status_code)
         logging.info(response.text)
@@ -196,15 +197,15 @@ def covid19data_to_ttdata(pre_did, source_file, URL, data_date, blocksize, num_b
     return int(totalsize / blocksize)
         
 def check_status(stage,response):    
-    if (response[0] == 200):
-        logging.info(stage + " gets number of items: %d " % len(response[1]))
+    if (response.ok):
+        logging.info(stage + ": pass")
         print(stage + ": pass")
     else: 
         logging.info(stage + ": failed")
         print(stage, ": failed")
         #TODO send sms to the system admin
 
-def check_covid19_upload(host, did, blocksize, num_batches):
+def check_covid19_upload(did, blocksize, num_batches):
     github_root = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports"
     #blocksizeNum = 200
     #waitsecNum = 0
@@ -213,7 +214,6 @@ def check_covid19_upload(host, did, blocksize, num_batches):
     
     #didNum =
     covid19data_to_ttdata(did, source_file= file, 
-                            URL = host + "/uploaddata", 
                             data_date = "2020-05-09", 
                             blocksize = blocksize,
                             num_batches = num_batches)
@@ -238,9 +238,7 @@ def register(did):
                 "category": "TEST"
             }
     response = ttdata.post("/register", payload)
-    appkey = None
-    if response[1]["data"]:
-        appkey = response[1]["data"]
+    appkey = json.loads(response.text)["data"]
     return(appkey)
 
 
@@ -298,7 +296,7 @@ if __name__ == '__main__':
     appkey = ""
     ttdata = TTDataService()
     ttdata.url = host_url    
-    device_id = "test-ttdata-20200528"
+    device_id = "test-ttdata-20200610"
     check_reg_upload_getdata(device_id)
 
     # Register
@@ -310,7 +308,7 @@ if __name__ == '__main__':
     #   0 means for none
     #   any number larger than totalsize of the data / blocksize means for all
     # 
-    check_covid19_upload(host_url, device_id, 200, 9999)
+    check_covid19_upload(device_id, 200, 9999)
 
     
     
