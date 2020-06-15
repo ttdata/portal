@@ -26,7 +26,7 @@ appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
 		{
 			"datetime": "2020-03-23T01:01:01",
 			"issuer": "lab1",
-			"owner": "renshan",
+			"owner": "John Smith",
 			"med_data": {
 				"temperature": 36.5,
 				"heart_rate": 76,
@@ -62,7 +62,7 @@ appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
 {
 	"data_type": 1,
 	"device_id":"test-med-51502",
-	"owner":"renshan",
+	"owner":"John Smith",
 	"viewer": "viewer02",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
