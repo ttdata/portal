@@ -20,6 +20,9 @@
     },
   "Vicky-Ubuntu": {
     "host": "http://52.170.154.169"    
-    } 
+    } ,
+    "Local":{
+      "host":"http://localhost"
+    }
   }
 }

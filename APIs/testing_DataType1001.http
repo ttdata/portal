@@ -1,0 +1,46 @@
+### VSCode Extention: Rest Client
+### Ctrl + Alt + E to change the environment
+
+### Registration
+POST {{host}}:{{port}}/register
+content-type: application/json
+
+{
+    "device_id": "test-ttdata-100",
+    "category": "testing"
+}
+
+### Upload data
+POST {{host}}:{{port}}/uploaddata
+content-type: application/json
+appkey: c9c069f7b8fbced8796e2b6341df456e718e703294874424691c037a28c3d6a6
+
+{
+    "data_type": 1001, 
+    "device_id": "test-ttdata-100", 
+    "key": "",
+    "required_field": "",
+    "device_data": [
+        {
+            "datetime": "06/09/2020 09:48:30",
+            "massage": "COVID19 data uploaded successfully",
+            "number": "200",
+            "other massage": 
+            {
+                "batch number": "1000 to 1499",
+                "use time": 4.593598,
+                "other massage":"using http://192.168.1.196:7061"
+            }
+        }
+    ]
+}
+
+### Querydata
+GET {{host}}:{{port}}/querydata?data_type=1001&device_id=test-ttdata-100
+appkey: c9c069f7b8fbced8796e2b6341df456e718e703294874424691c037a28c3d6a6
+
+### Get Shared Data
+GET {{host}}:{{port}}/getshareddata?
+&data_type=1001&device_id=test-ttdata-100
+appkey: c9c069f7b8fbced8796e2b6341df456e718e703294874424691c037a28c3d6a6
+# &data_type=2&device_id=test-ttdata-20200521&country_region=us&date=2020-03-02|2020-05-22&county=Allegany
