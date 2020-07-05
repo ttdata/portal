@@ -8,20 +8,20 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-med-51502",
+    "device_id": "test-med-51503",
 	"category": "test"
 }
 
 ### Upload data
 POST {{host}}:{{port}}/uploaddata
 content-type: application/json
-appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
 
 {
     "data_type": 1, 
-    "device_id": "test-med-51502", 
+    "device_id": "test-med-51503", 
     "key": "",
-	"required_field": "issur|owner",
+	"required_field": "issuer|owner",
 	"device_data": [
 		{
 			"datetime": "2020-03-23T01:01:01",
@@ -57,7 +57,7 @@ appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
 ### Request for sharing
 POST {{host}}:{{port}}/requestshare
 content-type: application/json
-appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
+appkey: efd14a75bcad90884293c87b0a1fba3e9d3b6a0a75f5f6ac546fbf050f521da1
 
 {
 	"data_type": 1,
@@ -66,12 +66,50 @@ appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
 	"viewer": "viewer02",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
+### Viewer request data access from owner
+POST {{host}}:{{port}}/requestsharing
+content-type: application/json
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+
+{
+	"data_type": 1,
+	"device_id":"test-med-51503",
+	"owner":"John Smith",
+	"viewer": "viewer04",
+	"fields": "heart_rate, glucose, blood_pressure"
+}
+### Owner get pending requests
+GET {{host}}:{{port}}/getrequest?
+&data_type=1&device_id=test-med-51503&owner=John%20Smith
+content-type: application/json
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+
+### Owner approve or reject the request 
+POST {{host}}:{{port}}/requestapproval
+content-type: application/json
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+
+{
+	"data_type": 1,
+	"device_id":"test-med-51503",
+	"owner":"John Smith",
+	"viewer": "viewer04",
+	"fields": "heart_rate, glucose, blood_pressure",
+	"request_id":"5f01f1a2b705741116ebc3ae",
+	"reuqest_approval":true
+}
+
+### Owner get owner's data
+GET {{host}}:{{port}}/getownerdata?
+&data_type=1&device_id=test-med-51502&owner=John%20Smith
+content-type: application/json
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
 
 ### Querydata
 GET {{host}}:{{port}}/querydata?data_type=1&device_id=test-med-51501
-appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=1&device_id=test-med-51502&viewer=viewer02
-appkey: fbf11bfe87aa1cce12c46142fa9ec7205d17e2368c59361d355d2b052f184ccc
+&data_type=1&device_id=test-med-51503&viewer=viewer04
+appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
