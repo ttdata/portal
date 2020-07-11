@@ -5,7 +5,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_auth
 import dash_table
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly.express as px
 import requests
@@ -133,15 +133,21 @@ app.layout = html.Div([
     html.Br(),
     dbc.Button("Uplaod", id = "upload_submit_button", color="primary", className="mr-1"),
     html.P(id="upload_output"),
+
+    #get owner data 
+    html.H1(children='Get owner data'),
+    dbc.FormGroup([dbc.Label("Input the Owner of data"), dbc.Input(id = "Input_owner", placeholder="Input the owner of data", type="text")]),
+    dbc.Button("Get the owner's data", id = "getowner_submit_button", color="primary", className="mr-1"),
+    html.P(id="getowner_output"),
 ])
 # register call function
 @app.callback(
         Output("reg_output", "children"), 
-        [Input("API_selection", "value"),
-        Input("reg_submit_button", "n_clicks"),
-        Input("Input_device_id", "value"),
-        Input("Input_category", "value")])
-def send_register_request(URL, n_clicks, DEVICEID, category):
+        [Input("reg_submit_button", "n_clicks")],
+        [State("API_selection", "value"),
+        State("Input_device_id", "value"),
+        State("Input_category", "value")])
+def send_register_request(n_clicks, URL, DEVICEID, category):
     URL_register = URL + '/register'
     register_result = " "
     register_text = None
@@ -164,20 +170,21 @@ def send_register_request(URL, n_clicks, DEVICEID, category):
 #upload data 
 @app.callback(
     Output("upload_output", "children"), 
-    [Input("API_selection", "value"),
-    Input("dtype_selection", "value"),
-    Input("Input_device_id", "value"),
-    Input("upload_submit_button", "n_clicks"),
-    Input("Input_keyfield", "value"),
-    Input("Input_payload", "value")]
+    [Input("upload_submit_button", "n_clicks")],
+    [State("API_selection", "value"),
+    State("dtype_selection", "value"),
+    State("Input_device_id", "value"),
+    State("Input_keyfield", "value"),
+    State("Input_payload", "value")]
 )
-def send_upload_request(URL, dtype, DEVICEID, n_clicks, keyfield, payload):
+def send_upload_request(n_clicks,  URL, dtype, DEVICEID,  keyfield, payload):
     URL_upload = URL + '/uploaddata'
     upload_result_mesg = None
     if n_clicks:
         payload = {"data_type": dtype, 
                     "device_id": DEVICEID, 
-                    "key": "date", 
+                    "key": "", 
+                    "required_field": "",
                     "device_data": payload   
                 }
         #Passing payload as dict
@@ -189,6 +196,29 @@ def send_upload_request(URL, dtype, DEVICEID, n_clicks, keyfield, payload):
         upload_result_mesg = upload_result['message']
     return upload_result_mesg
   
+
+#getownerdata
+
+@app.callback(
+    Output("getowner_output", "children"), 
+    [Input("getowner_submit_button", "n_clicks")],
+    [State("API_selection", "value"),
+    State("dtype_selection", "value"),
+    State("Input_device_id", "value"),
+    State("Input_owner", "value"),]
+)
+def send_getowner(n_clicks, URL, dtype, DEVICEID, OWNER):
+    URL_getowner = URL + '/getownerdata'
+    getowner_result_mesg = None
+    if n_clicks:
+        #query as request
+        query = {"data_type": dtype, 
+        "device_id": DEVICEID, 
+        "owner": OWNER}
+        response_get = requests.get(URL_getowner, params=query, timeout = 5, headers = {"appkey" : appkey})
+        get_result = json.loads(response_get.text)
+        getowner_result_mesg = get_result['message']
+    return getowner_result_mesg
 
 
 if __name__ == '__main__':
