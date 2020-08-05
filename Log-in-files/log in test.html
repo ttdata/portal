@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    
+    <style>
+        .tab{
+            overflow: hidden;
+            border: 1px solid;
+            width: 30%;
+            margin-left: 35%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: #E6F2FF;
+            border-color: #BCC1C1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            }
+        .tab button:hover {
+            background-color: #BCC1C1;
+            }
+        .tab button.active {
+            background-color: #BCC1C1;
+            }
+        .tabcontent {   
+            display: inline-block;       
+            border: 1px solid;
+            border-top-style: none;
+            width: 30%;
+            margin-left: 35%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            line-height: 2.5;
+            background-color: #E6F2FF;
+            border-color: #BCC1C1;
+        }
+        .tabcontent label {
+            float: left;
+            margin-left: 15%;
+        }
+        .tabcontent input {
+            float: right;
+            margin-right: 15%;
+            margin-top: 2.5%
+        }
+        .column {
+            flex: 10%;
+        }
+        .tablinks {
+            text-align: center;
+            line-height: 2.2;
+            font-family: "Calibri";
+            color: #555555;
+        }
+        .logDiv {
+            text-align: center;
+            line-height: 2.2;
+            font-family: "Calibri";
+            color: #555555;
+        }
+        .flexContainer{
+            display: flex;
+            height: 600px;
+            justify-content: center;
+        }
+        .flexContainer > div {
+            margin: 10px;
+            width: 200px;
+        }
+        body {
+            background-color: #F5FAFF;
+        }
+        .button {
+            padding: 4px 20px;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <div class = "logDiv">
+            <h2 style="font-size: 25px;">Log in</h2>
+        
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event,'Phone');document.getElementById('login-username').value=''" id="defaultOpen">Phone#</button>
+                    <button class="tablinks" onclick="openTab(event,'Email');document.getElementById('login-phone').value=''">Email</button>
+                </div>
+                <div id="Phone" class="tabcontent">
+                    <form onsubmit="loginPhone(event)">
+                    <label>Phone#</label>
+                    <input id="login-phone" type="number"/>
+                    <br>
+                    <label>Password</label>
+                    <input id="login-password" type="password"/>
+                    <br>
+                    <button class = "button">Log in</button>
+                    </form>
+                </div>
+                <div id="Email" class="tabcontent">
+                    <form onsubmit="loginUsername(event)">
+                    <label>Email </label>
+                    <input id="login-username" type="text"/>
+                    <br>
+                    <label>Password</label>
+                    <input id="login-password" type="password"/>
+                    <br>
+                    <button class = "button">Log in</button>
+                    </form>
+                </div>
+                <div class="flexContainer">
+                    <div><a>Forgot Password?</a></div>
+                    <div><a>Register</a></div>
+                </div>
+                <br>
+                
+
+        </div>
+
+    </body>
+
+    <script>
+        function getDomain() {
+            return "http://ttdata.life:7961"
+			}
+            
+        function loginPhone(e) {
+            e.preventDefault()
+             
+            const phone = document.getElementById('login-phone').value;
+            const password = document.getElementById('login-password').value;
+            
+            loginWithPhonePassword(phone, password);
+            
+            //onUpdateUser(e);
+
+            getSysInfo();
+            getInfo();
+            }
+        
+        function loginUsername(e) {
+            e.preventDefault()
+             
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            loginWithUserPassword(username, password);
+
+            //onUpdateUser(e);
+
+            getSysInfo();
+            getInfo();
+            }
+
+        async function getInfo() {
+            const dummy = "";
+            const res = await fetch(getDomain() + '/auth/local/t-getInfo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                   dummy
+                }),
+                credentials: 'include',
+            })
+            const body = await res.json()
+            //alert(`${body.result}: ${body.message}`);
+            console.log("Info: " + body.message);
+        }
+
+        async function getSysInfo() {
+            const dummy = "";
+            const res = await fetch(getDomain() + '/auth/local/t-getSysInfo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                   dummy
+                }),
+                credentials: 'include',
+            })
+            const body = await res.json()
+            console.log("Sys Info: " + body.message);
+        }
+
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        document.getElementById("defaultOpen").click()
+        async function loginWithPhonePassword(phone, password) {
+            const res = await fetch(getDomain() + '/auth/local/m.login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    mobile: phone.replace(/\D/g, ""),
+                    password,
+                }),
+                credentials: 'include',
+            })
+            const body = await res.json()
+            if (body.status === 'error') {
+                alert(body.message)
+                return
+            }
+            user = body.user
+            render()
+        }
+        async function loginWithUserPassword(username, password) {
+            const res = await fetch(getDomain() + '/auth/local/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                }),
+                credentials: 'include',
+                })
+            const body = await res.json()
+            if (body.status === 'error') {
+                alert(body.message)
+                return
+            }
+            user = body.user
+            render()
+        }
+    </script>
+    
