@@ -1,0 +1,14 @@
+### Registration
+POST {{host}}:{{port}}/register
+content-type: application/json
+
+{
+    "device_id": "test-med-51503",
+	"category": "test"
+}
+
+
+//get uploaded file by owner
+GET {{host}}:{{port}}/getuploadedfile?device_id=test-med-51506&data_type=3&owner=Vicky
+content-type: application/json
+appkey: 089f78d27bac526602ae02d93c9928d0f2241ea5964cad3f9d17a829481006c2
