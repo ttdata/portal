@@ -1,55 +1,17 @@
-def send_upload_request(n_clicks,  URL, dtype, DEVICEID,  keyfield, payload):
-    URL_upload = URL + '/uploaddata'
-    upload_result_mesg = None
-    if n_clicks:
-        payload = {"data_type": dtype, 
-                    "device_id": DEVICEID, 
-                    "key": "datetime", 
-                    "required_field": "datetime",
-                    "device_data": payload   
-                }
-        print(payload)
-        #Passing payload as dict
-        # response_upload = requests.post(URL_upload, 
-        #     json = payload, 
-        #     timeout = 5, 
-        #     headers = {"appkey" : appkey})
-        # upload_result = json.loads(response_upload.text)
-        # upload_result_mesg = upload_result['message']
-    return upload_result_mesg
-
-load_data = [
-		{
-			"datetime": "2020-03-23T01:01:01",
-			"issuer": "lab1",
-			"owner": "John simth",
-			"Height":180,
-			"weight":150,
-			"med_data": {
-				"temperature": 36.5,
-				"heart_rate": 76,
-				"glucose": 101,
-				"blood_pressure": {
-					"high": 130,
-					"low": 70
-				}
-			}
-		},
-		{
-			"datetime": "2020-03-24T01:01:01",
-			"issuer": "lab1",
-			"owner": "David",
-			"Height":181,
-			"weight":150,
-			"med_data": {
-				"temperature": 36.5,
-				"heart_rate": 76,
-				"glucose": 101,
-				"blood_pressure": {
-					"high": 130,
-					"low": 70
-				}
-			}
-		}
-	]
-send_upload_request(1, "xinbuy", 1, "yuantest", "date", load_data)
+import requests
+import json
+upload_result_mesg = None
+dtype = 1,
+DEVICEID = 'yang20200808a'
+appkey = 'ce3bc125f87bde6c57f785dce254d6d820d2636f4a8aa0f404a7f76bd55c11c8'
+URL_getowner = 'http://ixinbuy.com:7061/getownerdata'
+OWNER = 'David'
+getowner_result_mesg = None
+#query as request
+query = {"data_type": dtype, 
+"device_id": DEVICEID, 
+"owner": OWNER}
+response_get = requests.get(URL_getowner, params=query, timeout = 5, headers = {"appkey" : appkey})
+get_result = json.loads(response_get.text)
+print(get_result['message'])
+print(response_get.text)
