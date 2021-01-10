@@ -8,19 +8,19 @@ POST {{host}}:{{port}}/register
 content-type: application/json
 
 {
-    "device_id": "test-med-51503",
+    "device_id": "John_Smith1",
 	"category": "test"
 }
 
 ### Upload data
 POST {{host}}:{{port}}/uploaddata
 content-type: application/json
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
 {
     "data_type": 1, 
-    "device_id": "test-med-51503", 
-    "key": "",
+    "device_id": "John_Smith1", 
+    "key": "",   
 	"required_field": "issuer|owner",
 	"device_data": [
 		{
@@ -57,59 +57,57 @@ appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
 ### Request for sharing
 POST {{host}}:{{port}}/requestshare
 content-type: application/json
-appkey: efd14a75bcad90884293c87b0a1fba3e9d3b6a0a75f5f6ac546fbf050f521da1
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
 {
 	"data_type": 1,
-	"device_id":"test-med-51502",
+	"device_id":"John_Smith1",
 	"owner":"John Smith",
-	"viewer": "viewer02",
+	"viewer": "Peter",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
 ### Viewer request data access from owner
 POST {{host}}:{{port}}/requestsharing
 content-type: application/json
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
 {
 	"data_type": 1,
-	"device_id":"test-med-51503",
+	"device_id":"John_Smith1",
 	"owner":"John Smith",
-	"viewer": "viewer04",
+	"viewer": "Peter",
 	"fields": "heart_rate, glucose, blood_pressure"
 }
 ### Owner get pending requests
 GET {{host}}:{{port}}/getrequest?
-&data_type=1&device_id=test-med-51503&owner=John%20Smith
+&data_type=1&device_id=John_Smith1&owner=John%20Smith
 content-type: application/json
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
 ### Owner approve or reject the request 
 POST {{host}}:{{port}}/requestapproval
 content-type: application/json
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
 {
 	"data_type": 1,
-	"device_id":"test-med-51503",
+	"device_id":"John_Smith1",
 	"owner":"John Smith",
-	"viewer": "viewer04",
+	"viewer": "Peter",
 	"fields": "heart_rate, glucose, blood_pressure",
-	"request_id":"5f01f1a2b705741116ebc3ae",
+	"request_id":"5ffb29e9a4978f144ebcbe87",
 	"reuqest_approval":true
 }
 
 ### Owner get owner's data
 GET {{host}}:{{port}}/getownerdata?
-&data_type=1&device_id=test-med-51502&owner=John%20Smith
+&data_type=1&device_id=John_Smith1&owner=John Smith
 content-type: application/json
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
 
-### Querydata
-GET {{host}}:{{port}}/querydata?data_type=1&device_id=test-med-51501
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
 
 ### Get Shared Data
 GET {{host}}:{{port}}/getshareddata?
-&data_type=1&device_id=test-med-51503&viewer=viewer04
-appkey: 50509236a54f7239131f12f5b43a7389e8955fa606a98efa1f44bf8abf35ab9c
+&viewer=Peter&$filter=data_type eq 1 and device_id eq 'John_Smith1'
+appkey: 872ba39f0a66fe5dfd4ea4b4e2ce406f8192dd0978a9a3981c70ad845998e53f
+
